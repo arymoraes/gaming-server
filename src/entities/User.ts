@@ -1,8 +1,11 @@
+/* eslint-disable import/extensions */
+/* eslint-disable import/no-unresolved */
 /* eslint-disable no-shadow */
 /* eslint-disable no-unused-vars */
 import {
-  Entity, PrimaryGeneratedColumn, Column, BaseEntity,
+  Entity, PrimaryGeneratedColumn, Column, BaseEntity, ManyToMany, JoinTable,
 } from 'typeorm';
+import Game from './Game';
 
 export enum UserRole {
     ADMIN = 'admin',
@@ -56,4 +59,8 @@ export class User extends BaseEntity {
       default: null,
     })
     gender: Gender
+
+    @ManyToMany(() => Game)
+    @JoinTable()
+    games: Game[];
 }
