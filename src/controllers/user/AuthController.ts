@@ -23,7 +23,10 @@ class AuthController {
         return errorHandler(res, 400, 'Missing parameters');
       }
 
-      const userExists = createQueryBuilder('user')
+      const userExists = await getConnection()
+        .createQueryBuilder()
+        .select('user')
+        .from(User, 'user')
         .where('user.username = :username', { username })
         .orWhere('user.email = :email', { email })
         .getOne();
@@ -66,11 +69,8 @@ class AuthController {
           token,
         });
       });
-
-      // In case something went wrong
-      return errorHandler(res, 400, 'Something went wrong, please try again');
     } catch (error) {
-      return res.status(500).json({ error });
+      return errorHandler(res, 500, 'Server error');
     }
   }
 }
