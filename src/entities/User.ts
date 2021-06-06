@@ -63,4 +63,8 @@ export class User extends BaseEntity {
     @ManyToMany(() => Game)
     @JoinTable()
     games: Game[];
+
+    @ManyToMany(() => User)
+    @JoinTable()
+    users: User[];
 }
