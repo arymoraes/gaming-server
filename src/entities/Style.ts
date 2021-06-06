@@ -6,20 +6,12 @@ import {
 import { User } from './User';
 
   @Entity()
-export default class Region extends BaseEntity {
+export default class Style extends BaseEntity {
       @PrimaryGeneratedColumn()
       id: number;
 
-      @Column({
-        unique: true,
-      })
+      @Column()
       name: string;
-
-      @Column({
-        nullable: true,
-        type: 'timestamp without time zone',
-      })
-      timezone: Date;
 
       @ManyToMany(() => User)
       @JoinTable()

@@ -1,8 +1,9 @@
 /* eslint-disable import/extensions */
 /* eslint-disable import/no-unresolved */
 import {
-  Entity, PrimaryGeneratedColumn, Column, BaseEntity, ManyToMany, JoinTable,
+  Entity, PrimaryGeneratedColumn, Column, BaseEntity, ManyToMany, JoinTable, OneToMany,
 } from 'typeorm';
+import GameCategory from './GameCategory';
 import { User } from './User';
 
   @Entity()
@@ -24,5 +25,6 @@ export default class Game extends BaseEntity {
       @JoinTable()
       users: User[];
 
-  // Add categories later
+      @OneToMany(() => GameCategory, (gameCategory) => gameCategory.games)
+      gameCategories: GameCategory[];
 }
