@@ -7,6 +7,10 @@ import { createConnection } from 'typeorm';
 import bodyParser from 'body-parser';
 import router from './routes/main';
 import { User } from './entities/User';
+import GameCategory from './entities/GameCategory';
+import Region from './entities/Region';
+import Style from './entities/Style';
+import Game from './entities/Game';
 
 const app = express();
 
@@ -30,7 +34,7 @@ dotenv.config();
       username: process.env.DB_USERNAME,
       password: process.env.DB_PASSWORD,
       database: process.env.DB_NAME,
-      entities: [User],
+      entities: [User, Game, GameCategory, Region, Style],
       synchronize: true, // DO NOT USE FOR PRODUCTION! USE MIGRATIONS INSTEAD
     });
     app.listen(process.env.PORT, () => {
