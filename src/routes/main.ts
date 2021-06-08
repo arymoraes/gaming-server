@@ -8,7 +8,11 @@ const UserAuthController = new AuthController();
 
 const router = express.Router();
 
-router.get('/', () => console.log('fuck'));
+router.get('/', (req, res) => {
+  return res.status(200).json({
+    test: 'test'
+  });
+});
 
 // Login and Signup
 router.post('/user/register', UserAuthController.register);

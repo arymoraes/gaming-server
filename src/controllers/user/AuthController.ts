@@ -19,9 +19,13 @@ class AuthController {
         username, email, password, gender,
       } = req.body;
 
+      console.log('breakpoint 1');
+
       if (!email || !username || !password) {
         return errorHandler(res, 400, 'Missing parameters');
       }
+
+      console.log('breakpoint 2');
 
       const userExists = await getConnection()
         .createQueryBuilder()
@@ -31,14 +35,20 @@ class AuthController {
         .orWhere('user.email = :email', { email })
         .getOne();
 
+        console.log('breakpoint 3');
+
       if (userExists) {
         return errorHandler(res, 400, 'Username or Email already exists');
       }
+
+      console.log('breakpoint 4');
 
       bcrypt.hash(password, 10, async (err, hashedPassword) => {
         if (err) {
           return errorHandler(res, 401, 'There was some error with your password. Please, try again');
         }
+
+        console.log('breakpoint 5');
 
         const user: any = await getConnection()
           .createQueryBuilder()
@@ -56,9 +66,13 @@ class AuthController {
           ])
           .execute();
 
+          console.log('breakpoint 6');
+
         const token = jwt.sign({ id: user.id }, process.env.SECRET_KEY, {
           expiresIn: 1000 * 60 * 60 * 24 * 7,
         });
+
+        console.log('breakpoint 7');
 
         return res.status(200).json({
           user: {
