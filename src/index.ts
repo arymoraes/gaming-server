@@ -44,3 +44,5 @@ dotenv.config();
     console.log(err);
   }
 })();
+
+export default app;
