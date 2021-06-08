@@ -9,6 +9,7 @@ import dotenv from 'dotenv';
 import errorHandler from '../../utils/ErrorHandler';
 import { AuthRequest } from '../../middleware/auth';
 import { User } from '../../entities/User';
+import { validateEmail } from '../../utils/ValidateEmail';
 
 dotenv.config();
 
@@ -21,6 +22,14 @@ class AuthController {
 
       if (!email || !username || !password) {
         return errorHandler(res, 400, 'Missing parameters');
+      }
+
+      if (password.length < 7 || password.length > 16) {
+        return errorHandler(res, 400, 'Password should be between 8 and 16 characters');
+      }
+
+      if (!validateEmail(email)) {
+        return errorHandler(res, 400, 'Invalid email');
       }
 
       const userExists = await getConnection()
