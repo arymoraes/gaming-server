@@ -37,4 +37,19 @@ export const mockUser = {
     password: 'testtest',
     email: 'test@test.com',
   },
+  numberEmail: {
+    username: 'test',
+    password: 'testtest',
+    email: 123456,
+  },
+  numberPassword: {
+    username: 'test',
+    password: 123145,
+    email: 'test@test.com',
+  },
+  numberUsername: {
+    username: 123456,
+    password: 'testtest',
+    email: 'test@test.com',
+  },
 };
