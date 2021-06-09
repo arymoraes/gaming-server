@@ -1,5 +1,3 @@
-/* eslint-disable import/no-unresolved */
-/* eslint-disable import/extensions */
 /* eslint-disable class-methods-use-this */
 import { Response, Request } from 'express';
 import { getConnection } from 'typeorm';
