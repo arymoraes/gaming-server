@@ -65,7 +65,7 @@ class AuthController {
           ])
           .execute();
 
-        const token = jwt.sign({ id: user.id }, process.env.SECRET_KEY, {
+        const token = jwt.sign({ id: user.raw[0].id }, process.env.SECRET_KEY, {
           expiresIn: 1000 * 60 * 60 * 24 * 7,
         });
 

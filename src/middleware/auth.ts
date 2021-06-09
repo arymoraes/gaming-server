@@ -15,7 +15,7 @@ const authMiddleware = async (req: AuthRequest, res: Response, next: any) => {
   try {
     const authHeader = req.headers.authorization;
 
-    if (!authHeader) throw new Error('Header does not exist');
+    if (!authHeader) return res.status(404).json({ error: 'Header does not exist' });
 
     const [, token] = authHeader.split(' ');
 
@@ -25,14 +25,14 @@ const authMiddleware = async (req: AuthRequest, res: Response, next: any) => {
       .where('id = :id', { id: jwtCheck.id })
       .getOne();
 
-    if (!user) throw new Error('Invalid user');
+    if (!user) return res.status(403).json({ error: 'Invalid User' });
 
     req.user = user;
 
     next();
   } catch (error) {
     console.error(`Unauthorized route use: ${error}`);
-    res.status(403).json({ error });
+    res.status(500).json({ error });
   }
 };
 
