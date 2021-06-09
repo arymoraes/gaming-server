@@ -8,6 +8,7 @@ export const mockUser = {
     username: 'test',
     password: 'testtest',
     email: 'test@test.com',
+    isActive: true,
   },
   admin: {
     username: 'admin',

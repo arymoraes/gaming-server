@@ -40,9 +40,16 @@ describe('It should work with /user endpoint', () => {
 
   describe('Adding a user endpoint', () => {
     it('an admin should be able to add an admin user', async () => {
-      const admin = await User.create(mockUser.admin);
+      const admin: any = await getConnection()
+        .createQueryBuilder()
+        .insert()
+        .into(User)
+        .values([
+          mockUser.admin,
+        ])
+        .execute();
 
-      const token = jwt.sign({ id: admin.id }, process.env.SECRET_KEY, {
+      const token = jwt.sign({ id: admin.raw[0].id }, process.env.SECRET_KEY, {
         expiresIn: 1000 * 60 * 60 * 24 * 7,
       });
 
@@ -55,9 +62,16 @@ describe('It should work with /user endpoint', () => {
     });
 
     it('an admin should be able to add a regular user', async () => {
-      const admin = await User.create(mockUser.admin);
+      const admin: any = await getConnection()
+        .createQueryBuilder()
+        .insert()
+        .into(User)
+        .values([
+          mockUser.admin,
+        ])
+        .execute();
 
-      const token = jwt.sign({ id: admin.id }, process.env.SECRET_KEY, {
+      const token = jwt.sign({ id: admin.raw[0].id }, process.env.SECRET_KEY, {
         expiresIn: 1000 * 60 * 60 * 24 * 7,
       });
 
@@ -70,9 +84,16 @@ describe('It should work with /user endpoint', () => {
     });
 
     it('a regular user should not be able to create an admin or a regular user', async () => {
-      const admin = await User.create(mockUser.admin);
+      const user: any = await getConnection()
+        .createQueryBuilder()
+        .insert()
+        .into(User)
+        .values([
+          mockUser.regular,
+        ])
+        .execute();
 
-      const token = jwt.sign({ id: admin.id }, process.env.SECRET_KEY, {
+      const token = jwt.sign({ id: user.raw[0].id }, process.env.SECRET_KEY, {
         expiresIn: 1000 * 60 * 60 * 24 * 7,
       });
 

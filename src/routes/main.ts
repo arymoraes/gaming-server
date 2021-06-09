@@ -3,8 +3,11 @@
 import express from 'express';
 import authMiddleware from '../middleware/auth';
 import AuthController from '../controllers/user/AuthController';
+import adminAuthMiddleware from '../middleware/admin';
+import AdminController from '../controllers/admin/AdminController';
 
 const UserAuthController = new AuthController();
+const AdminUserController = new AdminController();
 
 const router = express.Router();
 
@@ -19,5 +22,8 @@ router.get('/user/me', authMiddleware, UserAuthController.me);
 // router.post('/forgotPassword', ProviderControllers.forgotPassword);
 // router.post('/resetPassword', ProviderControllers.resetPassword);
 // router.get('/verify/:token', ProviderControllers.verify);
+
+// Admin Routes
+router.post('/admin/user/register', authMiddleware, adminAuthMiddleware, AdminUserController.addUser);
 
 export default router;
