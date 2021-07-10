@@ -20,8 +20,8 @@ class AuthController {
         username, email, password, gender,
       } = req.body;
 
-      if (!email || !username || !password) {
-        return errorHandler(res, 400, 'Missing parameters');
+      if (!email || !username || !password || typeof email !== 'string' || typeof password !== 'string' || typeof username !== 'string') {
+        return errorHandler(res, 400, 'Missing or incorrect parameters');
       }
 
       if (password.length < 7 || password.length > 16) {

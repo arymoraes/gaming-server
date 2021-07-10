@@ -78,6 +78,24 @@ describe('It should work with /user endpoint', () => {
       expect(response.status).toBeGreaterThanOrEqual(400);
     });
 
+    it('should not create if username is not a string', async () => {
+      const response = await request.post('/user/register')
+        .send(mockUser.numberUsername);
+      expect(response.status).toBeGreaterThanOrEqual(400);
+    });
+
+    it('should not create if email is not a string', async () => {
+      const response = await request.post('/user/register')
+        .send(mockUser.numberEmail);
+      expect(response.status).toBeGreaterThanOrEqual(400);
+    });
+
+    it('should not create if password is not a string', async () => {
+      const response = await request.post('/user/register')
+        .send(mockUser.numberPassword);
+      expect(response.status).toBeGreaterThanOrEqual(400);
+    });
+
     it('should not create if user already exists', async () => {
       const response = await request.post('/user/register')
         .send(mockUser.regular);
