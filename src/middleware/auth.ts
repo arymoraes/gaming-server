@@ -6,7 +6,8 @@ import dotenv from 'dotenv';
 import { createQueryBuilder } from 'typeorm';
 
 export interface AuthRequest extends Request {
-  user: any;
+  user: any,
+  isAdmin: boolean,
 }
 
 dotenv.config();
