@@ -4,11 +4,12 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "prebuild": "tslint -c tslint.json -p tsconfig.json --fix",
     "build": "tsc",
     "prestart": "npm run build",
     "test": "jest --forceExit --maxWorkers=1",
-    "start": "node dist/index.js"
+    "start": "node dist/index.js",
+    "postinstall": "npm run tsc",
+    "tsc": "tsc"
   },
   "keywords": [],
   "author": "",
