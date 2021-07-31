@@ -15,7 +15,8 @@ import Game from './entities/Game';
 const app = express();
 
 const corsConfig = {
-  origin: [process.env.FRONTEND_URL, process.env.LANDING_URL, 'http://localhost:4000'],
+  // Remove '*' config for prod
+  origin: [process.env.FRONTEND_URL, process.env.LANDING_URL, '*'],
   credentials: true, // this is for allowing cookies
 };
 
