@@ -22,6 +22,11 @@ export default class Game extends BaseEntity {
       })
       url: string;
 
+      @Column({
+        nullable: true,
+      })
+      image: string;
+
       @ManyToMany(() => User)
       @JoinTable()
       users: User[];

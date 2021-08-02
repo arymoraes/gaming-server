@@ -17,7 +17,7 @@ const app = express();
 
 const corsConfig = {
   // Remove '*' config for prod
-  origin: [process.env.FRONTEND_URL, process.env.LANDING_URL, '*'],
+  origin: ['http://localhost:5000', '*'],
   credentials: true, // this is for allowing cookies
 };
 

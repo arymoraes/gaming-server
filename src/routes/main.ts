@@ -28,7 +28,8 @@ router.get('/user/me', authMiddleware, UserAuthController.me);
 // Admin Routes
 router.post('/admin/user/register', authMiddleware, adminAuthMiddleware, AdminUserController.addUser);
 
-router.post('/admin/game/add', authMiddleware, adminAuthMiddleware, GameController.addGame);
+router.get('/admin/games/', authMiddleware, adminAuthMiddleware, GameController.getGames);
+router.post('/admin/games/add', authMiddleware, adminAuthMiddleware, GameController.addGame);
 
 router.post('/admin/categories/add', authMiddleware, adminAuthMiddleware, CategoryController.addCategory);
 

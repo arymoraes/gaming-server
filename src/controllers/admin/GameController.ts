@@ -46,6 +46,16 @@ class GameController {
     }
   }
 
+  async getGames(_: Request, res: Response) {
+    try {
+      const games = await Game.find({ relations: ['categories', 'rank'] });
+      return res.status(200).json(games);
+    } catch (err) {
+      console.log(err);
+      return errorHandler(res, 500, 'Server error');
+    }
+  }
+
   async deleteGame(req: Request, res: Response) {
     try {
       const { id } = req.body;
