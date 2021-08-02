@@ -11,6 +11,7 @@ import GameCategory from './entities/GameCategory';
 import Region from './entities/Region';
 import Style from './entities/Style';
 import Game from './entities/Game';
+import Rank from './entities/Rank';
 
 const app = express();
 
@@ -35,7 +36,7 @@ dotenv.config();
       username: process.env.DB_USERNAME,
       password: process.env.DB_PASSWORD,
       database: process.env.DB_NAME,
-      entities: [User, Game, GameCategory, Region, Style],
+      entities: [User, Game, GameCategory, Region, Style, Rank],
       synchronize: true, // DO NOT USE FOR PRODUCTION! USE MIGRATIONS INSTEAD
     });
     app.listen(process.env.PORT, () => {
