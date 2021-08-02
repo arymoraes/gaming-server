@@ -6,6 +6,7 @@ import AuthController from '../controllers/user/AuthController';
 import adminAuthMiddleware from '../middleware/admin';
 import AdminController from '../controllers/admin/AdminController';
 import GameController from '../controllers/admin/GameController';
+import CategoryController from '../controllers/admin/CategoryController';
 
 const UserAuthController = new AuthController();
 const AdminUserController = new AdminController();
@@ -28,5 +29,7 @@ router.get('/user/me', authMiddleware, UserAuthController.me);
 router.post('/admin/user/register', authMiddleware, adminAuthMiddleware, AdminUserController.addUser);
 
 router.post('/admin/game/add', authMiddleware, adminAuthMiddleware, GameController.addGame);
+
+router.post('/admin/categories/add', authMiddleware, adminAuthMiddleware, CategoryController.addCategory);
 
 export default router;

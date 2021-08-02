@@ -25,6 +25,7 @@ export default class Game extends BaseEntity {
       @JoinTable()
       users: User[];
 
-      @OneToMany(() => GameCategory, (gameCategory) => gameCategory.games)
-      gameCategories: GameCategory[];
+      @ManyToMany(() => GameCategory)
+      @JoinTable()
+      categories: GameCategory[];
 }

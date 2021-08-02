@@ -37,7 +37,6 @@ dotenv.config();
       database: process.env.DB_NAME,
       entities: [User, Game, GameCategory, Region, Style],
       synchronize: true, // DO NOT USE FOR PRODUCTION! USE MIGRATIONS INSTEAD
-      ssl: { rejectUnauthorized: false }
     });
     app.listen(process.env.PORT, () => {
       console.log(`Server is up and listening on port ${process.env.PORT}.`);

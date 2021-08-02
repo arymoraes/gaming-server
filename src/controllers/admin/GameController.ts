@@ -3,28 +3,28 @@ import { Response, Request } from 'express';
 import { getConnection } from 'typeorm';
 import errorHandler from '../../utils/ErrorHandler';
 import Game from '../../entities/Game';
+import GameCategory from '../../entities/GameCategory';
 
 class GameController {
   async addGame(req: Request, res: Response) {
     try {
-      const { name, url } = req.body;
+      const { name, url, categories } = req.body;
 
       if (!name) return errorHandler(res, 404, 'Missing params');
 
-      const game = await getConnection()
-        .createQueryBuilder()
-        .insert()
-        .into(Game)
-        .values({
-          name, url,
-        })
-        .execute();
+      const categoriesModels = await GameCategory.findByIds(categories);
+
+      const game = Game.create({
+        name, url,
+      });
+      game.categories = categoriesModels;
+      game.save();
 
       // TODO: Change this later to make it easier to return the object
       return res.status(200).json({
         name,
         url,
-        id: game.raw[0].id,
+        id: game.id,
       });
     } catch (err) {
       return errorHandler(res, 500, 'Server error');
