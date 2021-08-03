@@ -12,8 +12,10 @@ class GameController {
       const { name, url, categories, ranks } = req.body;
 
       if (!name) return errorHandler(res, 404, 'Missing params');
-      
-      const categoriesModels = await GameCategory.findByIds(categories);
+      let categoriesModels: GameCategory[] = [];
+      if (categories && categories.length) {
+        categoriesModels = await GameCategory.findByIds(categories);
+      }
 
       const game = Game.create({
         name, url,

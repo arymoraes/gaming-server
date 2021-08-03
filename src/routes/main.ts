@@ -29,7 +29,7 @@ router.get('/user/me', authMiddleware, UserAuthController.me);
 router.post('/admin/user/register', authMiddleware, adminAuthMiddleware, AdminUserController.addUser);
 
 router.get('/admin/games/', authMiddleware, adminAuthMiddleware, GameController.getGames);
-router.post('/admin/games/add', authMiddleware, adminAuthMiddleware, GameController.addGame);
+router.post('/admin/games/add', GameController.addGame);
 
 router.post('/admin/categories/add', authMiddleware, adminAuthMiddleware, CategoryController.addCategory);
 
