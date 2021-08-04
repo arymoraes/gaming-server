@@ -18,6 +18,17 @@ class GameCategoryController {
         error,
       });
     }
+  };
+
+  async getCategories (req: AuthRequest, res: Response) {
+    try {
+      const categories = await GameCategory.find();
+      return res.status(200).json(categories);
+    } catch (error) {
+      return res.status(500).send({
+        error,
+      });
+    }
   }
 }
 

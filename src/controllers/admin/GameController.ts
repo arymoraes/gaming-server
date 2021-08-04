@@ -9,16 +9,17 @@ import Rank from '../../entities/Rank';
 class GameController {
   async addGame(req: Request, res: Response) {
     try {
-      const { name, url, categories, ranks } = req.body;
+      const { name, url, image, categories, ranks } = req.body;
 
       if (!name) return errorHandler(res, 404, 'Missing params');
+
       let categoriesModels: GameCategory[] = [];
       if (categories && categories.length) {
         categoriesModels = await GameCategory.findByIds(categories);
       }
 
       const game = Game.create({
-        name, url,
+        name, url, image,
       });
       game.categories = categoriesModels;
       await game.save();
@@ -32,7 +33,6 @@ class GameController {
         await singleRank.save();
         return singleRank;
       }));
-
 
       // TODO: Change this later to make it easier to return the object
       return res.status(200).json({
