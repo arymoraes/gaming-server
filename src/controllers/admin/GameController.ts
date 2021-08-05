@@ -9,19 +9,15 @@ import Rank from '../../entities/Rank';
 class GameController {
   async addGame(req: Request, res: Response) {
     try {
-      const { name, url, image, categories, ranks } = req.body;
+      const { name, url, image, category, ranks } = req.body;
 
       if (!name) return errorHandler(res, 404, 'Missing params');
-
-      let categoriesModels: GameCategory[] = [];
-      if (categories && categories.length) {
-        categoriesModels = await GameCategory.findByIds(categories);
-      }
 
       const game = Game.create({
         name, url, image,
       });
-      game.categories = categoriesModels;
+      const gameCategory = await GameCategory.findOne({ name: category.name });
+      game.category = gameCategory;
       await game.save();
 
       const ranksArray = await Promise.all(ranks.map(async (rank: any, index: number) => {
@@ -40,7 +36,7 @@ class GameController {
         url,
         id: game.id,
         ranks: ranksArray,
-        categories,
+        category: gameCategory.name,
       });
     } catch (err) {
       console.log(err);

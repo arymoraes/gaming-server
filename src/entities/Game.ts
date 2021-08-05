@@ -1,7 +1,7 @@
 /* eslint-disable import/extensions */
 /* eslint-disable import/no-unresolved */
 import {
-  Entity, PrimaryGeneratedColumn, Column, BaseEntity, ManyToMany, JoinTable, OneToMany,
+  Entity, PrimaryGeneratedColumn, Column, BaseEntity, ManyToMany, JoinTable, OneToMany, ManyToOne,
 } from 'typeorm';
 import GameCategory from './GameCategory';
 import Rank from './Rank';
@@ -31,9 +31,8 @@ export default class Game extends BaseEntity {
       @JoinTable()
       users: User[];
 
-      @ManyToMany(() => GameCategory)
-      @JoinTable()
-      categories: GameCategory[];
+      @ManyToOne(() => GameCategory, (category: GameCategory) => category.game)
+      category: GameCategory;
 
       @OneToMany(() => Rank, (rank) => rank.game)
       rank: Rank[];
